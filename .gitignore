@@ -1,0 +1,38 @@
+# Delphi binaries and build output
+*.dcu
+*.dcp
+*.exe
+*.dll
+*.bpl
+*.bpi
+*.dsk
+*.identcache
+*.local
+*.map
+*.hpp
+*.obj
+*.tds
+*.res
+*.rsm
+
+# Delphi intermediate and backup files
+*.~*
+*.bak
+*.cfg
+*.dof
+*.ddp
+*.dsm
+*.stat
+
+# Delphi project configuration (user-specific)
+*.dproj.local
+*.delphilsp.json
+*.vrc
+*.tvsconfig
+
+# Lazarus / Free Pascal
+*.ppu
+*.o
+*.compiled
+
+/Win32

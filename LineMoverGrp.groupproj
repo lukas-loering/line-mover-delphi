@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{C0C4DCC6-4313-4685-8C09-FFC254AE14CE}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="MoveLineDelphi.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="MoveLineDelphi">
+        <MSBuild Projects="MoveLineDelphi.dproj"/>
+    </Target>
+    <Target Name="MoveLineDelphi:Clean">
+        <MSBuild Projects="MoveLineDelphi.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MoveLineDelphi:Make">
+        <MSBuild Projects="MoveLineDelphi.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="MoveLineDelphi"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="MoveLineDelphi:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="MoveLineDelphi:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
