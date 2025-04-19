@@ -17,9 +17,24 @@ These shortcuts work with both single lines (when no text is selected) and multi
 
 ## Installation
 
-1. Build the `LineMover.bpl` project.
-2. Load the compiled BPL into the Delphi IDE via **Component > Install Packages**.
-3. Restart the IDE if necessary.
+### Get the BPL
+
+You have two options:
+
+- **Option 1: Build from source**  
+  Open the `LineMover.bpl` project in Delphi and build it.  
+  The compiled `.bpl` will be placed in the configured **Package Output Directory**, which can be found under:  
+  **Tools > Options > Language > Delphi > Library > Package Output Directory**
+
+- **Option 2: Download a precompiled BPL**  
+  Visit the [Releases](https://github.com/lukas-loering/line-mover-delphi/releases) section to download the compiled `.bpl`.  
+  Note: The precompiled version is built for **Delphi 12 Version 29.0.53982.0329** and may not load in other versions.
+
+### Install the Package
+
+1. In Delphi, go to **Component > Install Packages**.
+2. Click **Add**, browse to the `.bpl` file, and confirm.
+3. Restart the IDE if needed.
 
 Tested with:
 
