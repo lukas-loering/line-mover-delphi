@@ -127,7 +127,7 @@ var
   S                                                     : UTF8String;
   LastUnchangedRow                                      : Integer;
   Block                                                 : TBlock;
-  PersistentBlocks                                      : Boolean;
+  PersistentBlocks, InvertedBlock                       : Boolean;
 begin
   EditPosition := EditBuffer.EditPosition;
   EditBlock    := EditBuffer.EditBlock;
@@ -140,6 +140,8 @@ begin
   Block.EndingRow      := EditBlock.EndingRow;
   Block.StartingColumn := EditBlock.StartingColumn;
   Block.EndingColumn   := EditBlock.EndingColumn;
+
+  InvertedBlock := Block.StartingRow = Block.Row;
 
   if (BlockSize <> 0) and (EditBlock.Style = btColumn) then
   begin
@@ -241,7 +243,6 @@ begin
       EditBlock.Reset;
       EditBlock.Style := btNonInclusive;
 
-
       PersistentBlocks := EditBuffer.BufferOptions.PersistentBlocks;
       try
         EditBuffer.BufferOptions.PersistentBlocks := True;
@@ -252,7 +253,8 @@ begin
         finally
           EditBlock.EndBlock;
         end;
-        EditPosition.Move(Block.StartingRow + RowOffset, 1);
+        if InvertedBlock then
+          EditPosition.Move(Block.StartingRow + RowOffset, 1);
       finally
         EditBuffer.BufferOptions.PersistentBlocks := PersistentBlocks;
       end;
@@ -278,7 +280,7 @@ var
   Writer: IOTAEditWriter;
   S: UTF8String;
   Block: TBlock;
-  PersistentBlocks: Boolean;
+  PersistentBlocks, InvertedBlock: Boolean;
 begin
   EditPosition := EditBuffer.EditPosition;
   EditBlock    := EditBuffer.EditBlock;
@@ -292,6 +294,8 @@ begin
   Block.EndingRow      := EditBlock.EndingRow;
   Block.StartingColumn := EditBlock.StartingColumn;
   Block.EndingColumn   := EditBlock.EndingColumn;
+
+  InvertedBlock := Block.StartingRow = Block.Row;
 
   // normalize column‑mode to a single line
   if (BlockSize <> 0) and (EditBlock.Style = btColumn) then
@@ -375,20 +379,20 @@ begin
       // new copy starts at old EndingRow+1
       EditPosition.Move(EndRow + 1, 1);
       EditBlock.BeginBlock;
-      EditPosition.Move(EndRow + 1 + (BlockSize > 0).ToInteger
-                             * (EndRow - StartRow + 1), 1);
+      EditPosition.Move(EndRow + 1 + (BlockSize > 0).ToInteger * (EndRow - StartRow + 1), 1);
       EditBlock.EndBlock;
-      EditPosition.Move(EndRow + 1, 1);
+      if InvertedBlock then
+        EditPosition.Move(EndRow + 1, 1);
     end
     else
     begin
       // new copy starts at old StartingRow
       EditPosition.Move(StartRow, 1);
       EditBlock.BeginBlock;
-      EditPosition.Move(StartRow +  (BlockSize > 0).ToInteger
-                             * (EndRow - StartRow + 1), 1);
+      EditPosition.Move(StartRow + (BlockSize > 0).ToInteger * (EndRow - StartRow + 1), 1);
       EditBlock.EndBlock;
-      EditPosition.Move(StartRow, 1);
+      if InvertedBlock then
+        EditPosition.Move(StartRow, 1);
     end;
   finally
     // restore whatever PersistentBlocks was before
