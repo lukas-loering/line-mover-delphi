@@ -74,12 +74,10 @@ begin
   end;
 end;
 
-
 procedure Register;
 begin
   (BorlandIDEServices as IOTAKeyboardServices).AddKeyboardBinding(TLineMover.Create);
 end;
-
 
 { TLineMover }
 
@@ -271,15 +269,15 @@ type
     StartingColumn, EndingColumn: Integer;
   end;
 var
-  StartRow, EndRow, LastRow, Row: Integer;
-  BlockSize: Integer;
-  EditBlock: IOTAEditBlock;
-  EditPosition: IOTAEditPosition;
-  Source: UTF8String;
-  P, BlockStart, BlockEnd: PAnsiChar;
-  Writer: IOTAEditWriter;
-  S: UTF8String;
-  Block: TBlock;
+  StartRow, EndRow, LastRow, Row : Integer;
+  BlockSize                      : Integer;
+  EditBlock                      : IOTAEditBlock;
+  EditPosition                   : IOTAEditPosition;
+  Source                         : UTF8String;
+  P, BlockStart, BlockEnd        : PAnsiChar;
+  Writer                         : IOTAEditWriter;
+  S                              : UTF8String;
+  Block                          : TBlock;
   PersistentBlocks, InvertedBlock: Boolean;
 begin
   EditPosition := EditBuffer.EditPosition;
@@ -372,7 +370,7 @@ begin
   PersistentBlocks := EditBuffer.BufferOptions.PersistentBlocks;
   try
     EditBlock.Reset;
-    EditBlock.Style := btNonInclusive;
+    EditBlock.Style                           := btNonInclusive;
     EditBuffer.BufferOptions.PersistentBlocks := True;
     if Down then
     begin
@@ -399,7 +397,6 @@ begin
     EditBuffer.BufferOptions.PersistentBlocks := PersistentBlocks;
   end;
 end;
-
 
 procedure TLineMover.DoKeyBinding(const Context: IOTAKeyContext; KeyCode: TShortCut; var BindingResult: TKeyBindingResult);
 begin
