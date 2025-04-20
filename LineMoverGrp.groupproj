@@ -1,9 +1,9 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{C0C4DCC6-4313-4685-8C09-FFC254AE14CE}</ProjectGuid>
+        <ProjectGuid>{CE401708-E9ED-401B-BB20-064D94548B24}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="MoveLineDelphi.dproj">
+        <Projects Include="LineMover.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -14,23 +14,23 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="MoveLineDelphi">
-        <MSBuild Projects="MoveLineDelphi.dproj"/>
+    <Target Name="LineMover">
+        <MSBuild Projects="LineMover.dproj"/>
     </Target>
-    <Target Name="MoveLineDelphi:Clean">
-        <MSBuild Projects="MoveLineDelphi.dproj" Targets="Clean"/>
+    <Target Name="LineMover:Clean">
+        <MSBuild Projects="LineMover.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="MoveLineDelphi:Make">
-        <MSBuild Projects="MoveLineDelphi.dproj" Targets="Make"/>
+    <Target Name="LineMover:Make">
+        <MSBuild Projects="LineMover.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="MoveLineDelphi"/>
+        <CallTarget Targets="LineMover"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="MoveLineDelphi:Clean"/>
+        <CallTarget Targets="LineMover:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="MoveLineDelphi:Make"/>
+        <CallTarget Targets="LineMover:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
